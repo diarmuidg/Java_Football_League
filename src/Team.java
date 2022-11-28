@@ -40,10 +40,6 @@ public class Team implements Comparable<Team> {
         this.points += 1;
     }
 
-    public void addGoals(int goalsScored) {
-        this.goalsScored += goalsScored;
-    }
-
     @Override
     public boolean equals(Object object)
     {
