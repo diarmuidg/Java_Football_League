@@ -1,7 +1,13 @@
-public class Team {
+public class Team implements Comparable<Team> {
     private final String name;
     private final String location;
     int points = 0;
+
+    public int getGoalsScored() {
+        return goalsScored;
+    }
+
+    int goalsScored = 0;
 
     public Team(String name, String location) {
         this.name = name;
@@ -27,11 +33,15 @@ public class Team {
     }
 
     public void addWin() {
-        points += 3;
+        this.points += 3;
     }
 
     public void addDraw() {
-        points += 1;
+        this.points += 1;
+    }
+
+    public void addGoals(int goalsScored) {
+        this.goalsScored += goalsScored;
     }
 
     @Override
@@ -47,5 +57,30 @@ public class Team {
         }
 
         return sameObj;
+    }
+
+    @Override
+    public int compareTo(Team teamToCompare) {
+        // First check the number of points
+        if (teamToCompare.getPoints() > this.getPoints())
+            return 1;
+        else if (teamToCompare.getPoints() < this.getPoints())
+            return -1;
+
+        // If we get here they are equal on points so compare goals scored
+        if (teamToCompare.getGoalsScored() > this.getGoalsScored())
+            return 1;
+        else if (teamToCompare.getGoalsScored() < this.getGoalsScored())
+            return -1;
+
+        // Points and goals scored are equal so compare by name, then by location
+        int nameCompare = this.getName().compareTo(teamToCompare.getName());
+
+        // If the names are different return the comparison of the names
+        if (nameCompare != 0)
+            return nameCompare;
+        else
+            // else return the comparison of the locations
+            return this.getLocation().compareTo(teamToCompare.getLocation());
     }
 }

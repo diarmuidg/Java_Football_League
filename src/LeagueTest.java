@@ -7,44 +7,51 @@ class LeagueTest {
     @Test
     @DisplayName("testLeagueOne")
     void testLeagueOne() {
-        // Create the two teams
+        // Create the teams
         League leagueOne = new League();
-        Team teamOne = new Team("TeamOneName", "TeamOneLocation");
-        Team teamTwo = new Team("TeamTwoName", "TeamTwoLocation");
-        Team teamThree = new Team("TeamThreeName", "TeamThreeLocation");
-        Team teamFour = new Team("TeamFourName", "TeamFourLocation");
+        Team teamA = new Team("Team A", "TeamALocation");
+        Team teamB = new Team("Team B", "TeamBLocation");
+        Team teamC = new Team("Team C", "TeamCLocation");
+        Team teamD = new Team("Team D", "TeamDLocation");
 
-        leagueOne.addTeam(teamOne);
-        leagueOne.addTeam(teamTwo);
-        leagueOne.addTeam(teamThree);
-        leagueOne.addTeam(teamFour);
+        leagueOne.addTeam(teamA);
+        leagueOne.addTeam(teamB);
+        leagueOne.addTeam(teamC);
+        leagueOne.addTeam(teamD);
 
         // Check that the league does indeed contain four teams
         assertEquals(4, leagueOne.teams.size());
 
         // Add a home win
         Score scoreOne = new Score(1, 0);
-        Game gameOne = new Game(teamOne, teamTwo, scoreOne);
+        Game gameOne = new Game(teamA, teamB, scoreOne);
         leagueOne.addGame(gameOne);
 
         assertEquals("""
-                TeamOneName from TeamOneLocation currently has 3 points.
-                TeamTwoName from TeamTwoLocation currently has 0 points.
-                TeamThreeName from TeamThreeLocation currently has 0 points.
-                TeamFourName from TeamFourLocation currently has 0 points.
+                Team A from TeamALocation currently has 3 points.
+                Team B from TeamBLocation currently has 0 points.
+                Team C from TeamCLocation currently has 0 points.
+                Team D from TeamDLocation currently has 0 points.
                 """, leagueOne.toString());
 
         // Add a draw
         Score scoreTwo = new Score(1, 1);
-        Game gameTwo = new Game(teamThree, teamFour, scoreTwo);
+        Game gameTwo = new Game(teamC, teamD, scoreTwo);
         leagueOne.addGame(gameTwo);
 
         assertEquals("""
-                TeamOneName from TeamOneLocation currently has 3 points.
-                TeamTwoName from TeamTwoLocation currently has 0 points.
-                TeamThreeName from TeamThreeLocation currently has 1 point.
-                TeamFourName from TeamFourLocation currently has 1 point.
+                Team A from TeamALocation currently has 3 points.
+                Team B from TeamBLocation currently has 0 points.
+                Team C from TeamCLocation currently has 1 point.
+                Team D from TeamDLocation currently has 1 point.
                 """, leagueOne.toString());
+
+        assertEquals("""
+                Team A from TeamALocation currently has 3 points.
+                Team C from TeamCLocation currently has 1 point.
+                Team D from TeamDLocation currently has 1 point.
+                Team B from TeamBLocation currently has 0 points.
+                """, leagueOne.orderedToString());
 
     }
 }

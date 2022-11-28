@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class League {
     ArrayList<Team> teams = new ArrayList<>();
@@ -43,7 +44,7 @@ public class League {
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder();
-        for (Object team : teams) {
+        for (Team team : teams) {
             output.append(team.toString()).append("\n");
         }
 
@@ -51,6 +52,13 @@ public class League {
     }
 
     public String orderedToString() {
-        return "";
+        Collections.sort(teams);
+
+        StringBuilder output = new StringBuilder();
+        for (Team team : teams) {
+            output.append(team.toString()).append("\n");
+        }
+
+        return output.toString();
     }
 }
